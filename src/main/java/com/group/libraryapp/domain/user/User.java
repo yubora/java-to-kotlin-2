@@ -2,6 +2,8 @@ package com.group.libraryapp.domain.user;
 
 import com.group.libraryapp.domain.book.Book;
 import com.group.libraryapp.domain.user.loanhistory.UserLoanHistory;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -52,10 +54,14 @@ public class User {
     targetHistory.doReturn();
   }
 
+  @NotNull
   public String getName() {
     return name;
   }
 
+  // kotlin 입장에서 플랫폼 타입이기 때문에 런타임 오류 발생 가능
+  // null 정보를 달아주자.
+  @Nullable
   public Integer getAge() {
     return age;
   }
