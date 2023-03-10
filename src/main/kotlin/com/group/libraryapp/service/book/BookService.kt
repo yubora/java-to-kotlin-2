@@ -7,6 +7,7 @@ import com.group.libraryapp.domain.user.loanhistory.UserLoanHistoryRepository
 import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
+import com.group.libraryapp.util.fail
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -26,18 +27,18 @@ class BookService @Autowired constructor(
 
     @Transactional
     fun loanBook(request: BookLoanRequest) {
-        val book = bookRepository.findByName(request.bookName).orElseThrow(::IllegalArgumentException)
+        val book = bookRepository.findByName(request.bookName) ?: fail()
         if (userLoanHistoryRepository.findByBookNameAndIsReturn(request.bookName, false) != null) {
             throw  IllegalArgumentException("이미 대출되어 있는 책입니다.")
         }
 
-        val user = userRepository.findByName(request.userName).orElseThrow(::IllegalArgumentException)
+        val user = userRepository.findByName(request.userName) ?: fail()
         user.loanBook(book)
     }
 
     @Transactional
     fun returnBook(request: BookReturnRequest) {
-        val user = userRepository.findByName(request.userName).orElseThrow(::IllegalArgumentException)
+        val user = userRepository.findByName(request.userName) ?: fail()
         user.returnBook(request.bookName)
     }
 }

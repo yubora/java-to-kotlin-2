@@ -78,14 +78,12 @@ class UserServiceTest @Autowired constructor(
     fun deleteUserTest() {
         // given
         userRepository.save(User("yubora", 100))
-        val savedUser = userRepository.findByName("yubora").get()
 
         // when
-        userService.deleteUser(savedUser.name)
+        userService.deleteUser("yubora")
 
         // then
-        val result = userRepository.findByName(savedUser.name)
-        assertThat(result).isEmpty
+        assertThat(userRepository.findAll()).isEmpty()
     }
 
 }
