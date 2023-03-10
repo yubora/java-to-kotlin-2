@@ -11,14 +11,15 @@ import com.group.libraryapp.dto.book.request.BookReturnRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Deprecated
 @Service
-public class BookService {
+public class JavaBookService {
 
   private final BookRepository bookRepository;
   private final UserRepository userRepository;
   private final UserLoanHistoryRepository userLoanHistoryRepository;
 
-  public BookService(
+  public JavaBookService(
       BookRepository bookRepository,
       UserRepository userRepository,
       UserLoanHistoryRepository userLoanHistoryRepository

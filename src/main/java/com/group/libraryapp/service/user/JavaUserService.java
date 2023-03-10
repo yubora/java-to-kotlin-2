@@ -13,11 +13,12 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserService {
+@Deprecated
+public class JavaUserService {
 
   private final UserRepository userRepository;
 
-  public UserService(UserRepository userRepository) {
+  public JavaUserService(UserRepository userRepository) {
     this.userRepository = userRepository;
   }
 

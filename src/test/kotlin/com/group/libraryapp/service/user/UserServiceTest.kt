@@ -50,7 +50,7 @@ class UserServiceTest @Autowired constructor(
         ))
 
         // when
-        val results = userService.users
+        val results = userService.getUsers()
 
         // then
         assertThat(results).hasSize(2)
