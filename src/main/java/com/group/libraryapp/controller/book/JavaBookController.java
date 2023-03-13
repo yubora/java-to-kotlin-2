@@ -9,12 +9,13 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-@RestController
-public class BookController {
+@Deprecated
+//@RestController
+public class JavaBookController {
 
   private final BookService bookService;
 
-  public BookController(BookService bookService) {
+  public JavaBookController(BookService bookService) {
     this.bookService = bookService;
   }
 
