@@ -1,11 +1,12 @@
 package com.group.libraryapp.dto.user.request;
 
-public class UserUpdateRequest {
+@Deprecated
+public class JavaUserUpdateRequest {
 
   private long id;
   private String name;
 
-  public UserUpdateRequest(long id, String name) {
+  public JavaUserUpdateRequest(long id, String name) {
     this.id = id;
     this.name = name;
   }

@@ -2,9 +2,9 @@ package com.group.libraryapp.service.user;
 
 import com.group.libraryapp.domain.user.User;
 import com.group.libraryapp.domain.user.JavaUserRepository;
-import com.group.libraryapp.dto.user.request.UserCreateRequest;
-import com.group.libraryapp.dto.user.request.UserUpdateRequest;
-import com.group.libraryapp.dto.user.response.UserResponse;
+import com.group.libraryapp.dto.user.request.JavaUserCreateRequest;
+import com.group.libraryapp.dto.user.request.JavaUserUpdateRequest;
+import com.group.libraryapp.dto.user.response.JavaUserResponse;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -23,20 +23,20 @@ public class JavaUserService {
   }
 
   @Transactional
-  public void saveUser(UserCreateRequest request) {
+  public void saveUser(JavaUserCreateRequest request) {
     User newUser = new User(request.getName(), request.getAge(), Collections.emptyList(), null);
     userRepository.save(newUser);
   }
 
   @Transactional(readOnly = true)
-  public List<UserResponse> getUsers() {
+  public List<JavaUserResponse> getUsers() {
     return userRepository.findAll().stream()
-        .map(UserResponse::new)
+        .map(JavaUserResponse::new)
         .collect(Collectors.toList());
   }
 
   @Transactional
-  public void updateUserName(UserUpdateRequest request) {
+  public void updateUserName(JavaUserUpdateRequest request) {
     User user = userRepository.findById(request.getId()).orElseThrow(IllegalArgumentException::new);
     user.updateName(request.getName());
   }

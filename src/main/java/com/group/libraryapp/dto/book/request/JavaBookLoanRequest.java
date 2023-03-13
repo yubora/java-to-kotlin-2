@@ -1,11 +1,12 @@
 package com.group.libraryapp.dto.book.request;
 
-public class BookLoanRequest {
+@Deprecated
+public class JavaBookLoanRequest {
 
   private String userName;
   private String bookName;
 
-  public BookLoanRequest(String userName, String bookName) {
+  public JavaBookLoanRequest(String userName, String bookName) {
     this.userName = userName;
     this.bookName = bookName;
   }

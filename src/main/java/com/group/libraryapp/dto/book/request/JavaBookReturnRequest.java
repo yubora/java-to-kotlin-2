@@ -2,12 +2,13 @@ package com.group.libraryapp.dto.book.request;
 
 import org.jetbrains.annotations.NotNull;
 
-public class BookReturnRequest {
+@Deprecated
+public class JavaBookReturnRequest {
 
   private String userName;
   private String bookName;
 
-  public BookReturnRequest(String userName, String bookName) {
+  public JavaBookReturnRequest(String userName, String bookName) {
     this.userName = userName;
     this.bookName = bookName;
   }

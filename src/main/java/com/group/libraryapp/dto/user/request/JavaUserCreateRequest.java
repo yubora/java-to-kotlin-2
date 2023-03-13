@@ -1,11 +1,12 @@
 package com.group.libraryapp.dto.user.request;
 
-public class UserCreateRequest {
+@Deprecated
+public class JavaUserCreateRequest {
 
   private String name;
   private Integer age;
 
-  public UserCreateRequest(String name, Integer age) {
+  public JavaUserCreateRequest(String name, Integer age) {
     this.name = name;
     this.age = age;
   }
