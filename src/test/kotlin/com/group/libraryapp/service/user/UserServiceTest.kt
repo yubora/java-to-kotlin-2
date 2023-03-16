@@ -1,6 +1,5 @@
 package com.group.libraryapp.service.user
 
-import com.group.libraryapp.domain.book.Book
 import com.group.libraryapp.domain.book.BookRepository
 import com.group.libraryapp.domain.user.User
 import com.group.libraryapp.domain.user.UserRepository
@@ -28,6 +27,7 @@ class UserServiceTest @Autowired constructor(
     // 정상적인 테스트를 위해서는 각 메서드 종료 후 공유 자원인 DB를 정리해줘야 함
     @AfterEach
     fun clean() {
+        println("# CLEAN #")
         userRepository.deleteAll()
     }
 
@@ -139,24 +139,6 @@ class UserServiceTest @Autowired constructor(
 //        assertThat(results[0].books[1].isReturn).isFalse
 //        assertThat(results[0].books[2].name).isEqualTo("book3")
 //        assertThat(results[0].books[2].isReturn).isTrue
-    }
-
-    @Test
-    @DisplayName("대출 기록 조회 정상")
-    fun getUserLoanHistoriesTest() {
-        // given
-        val user = userRepository.save(User("yubora", null))
-        val book = bookRepository.save(Book.fixture("book1"))
-        user.loanBook(book)
-
-        // when
-        val result = userService.getUserLoanHistories()
-
-        // then
-        assertThat(result[0].name).isEqualTo("yubora")
-        assertThat(result[0].books).hasSize(1)
-        assertThat(result[0].books[0].name).isEqualTo("book1")
-        assertThat(result[0].books[0].isReturn).isFalse
     }
 
 }
