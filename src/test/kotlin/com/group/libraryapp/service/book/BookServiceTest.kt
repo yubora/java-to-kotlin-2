@@ -115,13 +115,14 @@ class BookServiceTest @Autowired constructor(
         // given
         val savedUser = userRepository.save(User("yubora", null))
         userLoanHistoryRepository.save(UserLoanHistory.fixture(savedUser, "book1"))
-        userLoanHistoryRepository.save(UserLoanHistory.fixture(savedUser, "book2"))
+        userLoanHistoryRepository.save(UserLoanHistory.fixture(savedUser, "book2", UserLoanStatus.RETURNED))
+        userLoanHistoryRepository.save(UserLoanHistory.fixture(savedUser, "book3", UserLoanStatus.RETURNED))
 
         // when
         val result = bookService.countLoanedBook()
 
         // then
-        assertThat(result).isEqualTo(2)
+        assertThat(result).isEqualTo(1)
     }
 
     @Test

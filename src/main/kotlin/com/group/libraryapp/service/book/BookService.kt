@@ -51,20 +51,28 @@ class BookService @Autowired constructor(
 
     @Transactional(readOnly = true)
     fun getBookStatistics(): List<BookStatResponse> {
-        val results = mutableListOf<BookStatResponse>()
+        // refactor 1
+//        val results = mutableListOf<BookStatResponse>()
+//
+//        val books = bookRepository.findAll()
+//        for (book in books) {
+//            results.firstOrNull { dto -> dto.type == book.type }?.plusOne()
+//                ?: results.add(BookStatResponse(book.type, 1))
+//
+            // == origin start ==
+////            val targetDto = results.firstOrNull { dto -> dto.type == book.type }
+////            if (targetDto == null) {
+////                results.add(BookStatResponse(book.type, 1))
+////            } else {
+////                targetDto.plusOne()
+////            }
+            // == origin end ==
+//        }
+//        return results
 
-        val books = bookRepository.findAll()
-        for (book in books) {
-            results.firstOrNull { dto -> dto.type == book.type }?.plusOne()
-                ?: results.add(BookStatResponse(book.type, 1))
-
-//            val targetDto = results.firstOrNull { dto -> dto.type == book.type }
-//            if (targetDto == null) {
-//                results.add(BookStatResponse(book.type, 1))
-//            } else {
-//                targetDto.plusOne()
-//            }
-        }
-        return results
+        // refactor 2
+        return bookRepository.findAll()
+            .groupBy { book -> book.type }
+            .map { (type, books) -> BookStatResponse(type, books.size) }
     }
 }
