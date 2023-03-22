@@ -46,7 +46,8 @@ class BookService @Autowired constructor(
 
     @Transactional(readOnly = true)
     fun countLoanedBook(): Int {
-        return userLoanHistoryRepository.findAllByStatus(UserLoanStatus.LOANED).size
+//        return userLoanHistoryRepository.findAllByStatus(UserLoanStatus.LOANED).size
+        return userLoanHistoryRepository.countByStatus(UserLoanStatus.LOANED).toInt()
     }
 
     @Transactional(readOnly = true)
@@ -71,8 +72,11 @@ class BookService @Autowired constructor(
 //        return results
 
         // refactor 2
-        return bookRepository.findAll()
-            .groupBy { book -> book.type }
-            .map { (type, books) -> BookStatResponse(type, books.size) }
+//        return bookRepository.findAll()
+//            .groupBy { book -> book.type }
+//            .map { (type, books) -> BookStatResponse(type, books.size) }
+
+        // refactor 3
+        return bookRepository.getBookStatistics()
     }
 }
