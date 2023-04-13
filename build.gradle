@@ -6,6 +6,7 @@ plugins {
     id 'org.jetbrains.kotlin.plugin.jpa' version '1.6.21'
     id 'org.jetbrains.kotlin.plugin.allopen' version '1.6.21'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.6.21'
+    id 'org.jetbrains.kotlin.kapt' version '1.6.21'
 }
 
 allOpen {
@@ -28,6 +29,10 @@ dependencies {
     implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk8'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.6.21'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin:2.13.3' // JSON 파싱 에러 해결 - jackson이 Kotlin Class를 생성할 수 있도록 하는 모듈 추가
+    implementation 'com.querydsl:querydsl-jpa:5.0.0'
+    kapt('com.querydsl:querydsl-apt:5.0.0:jpa')
+    kapt('org.springframework.boot:spring-boot-configuration-processor')
+
     runtimeOnly 'com.h2database:h2'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
