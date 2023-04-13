@@ -7,7 +7,7 @@ import com.querydsl.jpa.impl.JPAQueryFactory
 import org.springframework.stereotype.Component
 
 @Component
-class BookQueryDslRepository(
+class BookQuerydslRepository(
     private val queryFactory : JPAQueryFactory
 ) {
     fun getBookStatistics(): List<BookStatResponse> {

@@ -9,7 +9,8 @@ import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
 import com.group.libraryapp.dto.book.response.BookStatResponse
-import com.group.libraryapp.repository.book.BookQueryDslRepository
+import com.group.libraryapp.repository.book.BookQuerydslRepository
+import com.group.libraryapp.repository.user.loanhistory.UserLoanHistoryQuerydslRepository
 import com.group.libraryapp.util.fail
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -18,9 +19,9 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class BookService @Autowired constructor(
     private val bookRepository: BookRepository,
-    private val bookQueryDslRepository: BookQueryDslRepository,
+    private val bookQuerydslRepository: BookQuerydslRepository,
     private val userRepository: UserRepository,
-    private val userLoanHistoryRepository: UserLoanHistoryRepository,
+    private val userLoanHistoryQuerydslRepository: UserLoanHistoryQuerydslRepository,
 ) {
 
     @Transactional
@@ -32,7 +33,7 @@ class BookService @Autowired constructor(
     @Transactional
     fun loanBook(request: BookLoanRequest) {
         val book = bookRepository.findByName(request.bookName) ?: fail()
-        if (userLoanHistoryRepository.findByBookNameAndStatus(request.bookName, UserLoanStatus.LOANED) != null) {
+        if (userLoanHistoryQuerydslRepository.find(request.bookName, UserLoanStatus.LOANED) != null) {
             throw IllegalArgumentException("이미 대출되어 있는 책입니다.")
         }
 
@@ -49,7 +50,7 @@ class BookService @Autowired constructor(
     @Transactional(readOnly = true)
     fun countLoanedBook(): Int {
 //        return userLoanHistoryRepository.findAllByStatus(UserLoanStatus.LOANED).size
-        return userLoanHistoryRepository.countByStatus(UserLoanStatus.LOANED).toInt()
+        return userLoanHistoryQuerydslRepository.count(UserLoanStatus.LOANED).toInt()
     }
 
     @Transactional(readOnly = true)
@@ -82,6 +83,6 @@ class BookService @Autowired constructor(
 //        return bookRepository.getBookStatistics()
 
         // refactor 4
-        return bookQueryDslRepository.getBookStatistics()
+        return bookQuerydslRepository.getBookStatistics()
     }
 }
