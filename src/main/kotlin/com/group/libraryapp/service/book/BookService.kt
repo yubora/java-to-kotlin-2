@@ -9,6 +9,7 @@ import com.group.libraryapp.dto.book.request.BookLoanRequest
 import com.group.libraryapp.dto.book.request.BookRequest
 import com.group.libraryapp.dto.book.request.BookReturnRequest
 import com.group.libraryapp.dto.book.response.BookStatResponse
+import com.group.libraryapp.repository.book.BookQueryDslRepository
 import com.group.libraryapp.util.fail
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
@@ -17,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional
 @Service
 class BookService @Autowired constructor(
     private val bookRepository: BookRepository,
+    private val bookQueryDslRepository: BookQueryDslRepository,
     private val userRepository: UserRepository,
     private val userLoanHistoryRepository: UserLoanHistoryRepository,
 ) {
@@ -77,6 +79,9 @@ class BookService @Autowired constructor(
 //            .map { (type, books) -> BookStatResponse(type, books.size) }
 
         // refactor 3
-        return bookRepository.getBookStatistics()
+//        return bookRepository.getBookStatistics()
+
+        // refactor 4
+        return bookQueryDslRepository.getBookStatistics()
     }
 }
